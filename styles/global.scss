@@ -18,11 +18,13 @@ body {
     color: var(--bodycolor);
     font-family: var(--bodyfont), sans-serif;
     font-size: var(--bodyfontsize);
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.boton_negro {
-    color: white;
-    background-color: black;
-    border-color: white;
-    font-size: 35px;
+.root_container {
+    background: aliceblue;
+    max-width: 100%;
+    min-height: 100%;
 }

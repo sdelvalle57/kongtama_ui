@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StoreState } from 'src/types/store';
 
+import { ToolbarContentContainer } from './common/toolbar/toolbar_content';
+import { GeneralLayout } from './general_layout';
+const toolbar = <ToolbarContentContainer />;
 
 interface OwnProps {
     children: React.ReactNode;
@@ -33,9 +36,9 @@ class App extends React.Component<Props> {
 
     public render = () => {
         return(
-            <div >
+            <GeneralLayout toolbar={toolbar}>
                 {this.props.children}
-            </div>
+            </GeneralLayout>
         )
     };
 

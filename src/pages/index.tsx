@@ -42,7 +42,7 @@ class Index extends PureComponent<Props>{
 
     render () {
         return (
-            <Container>
+            <Container className="root_container">
                 <br/>
                 <br/>
                 <div><Button onClick={this.sayHello}>Say Hello</Button> </div>
