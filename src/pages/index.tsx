@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { StoreState } from 'src/types/store';
 import { getHelloMessage } from 'src/store/ui/selectors';
 import { setSayHelloMessage } from 'src/store/actions';
+import { WalletConnectButtonContainer } from 'src/components/wallet_connect_button';
 
 interface WithRouterProps {
     router: NextRouter
@@ -43,6 +44,7 @@ class Index extends PureComponent<Props>{
     render () {
         return (
             <Container className="root_container">
+                <WalletConnectButtonContainer />
                 <br/>
                 <br/>
                 <div><Button onClick={this.sayHello}>Say Hello</Button> </div>

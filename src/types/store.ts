@@ -1,6 +1,7 @@
 import { ActionCreator, AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { ExtraArgument } from '../store';
+import { Blockchain } from './blockchain';
 import { UI } from './ui';
 
 
@@ -9,4 +10,5 @@ export type ThunkCreator<R = Promise<any>> = ActionCreator<ThunkAction<R, StoreS
 
 export interface StoreState {
     readonly ui: UI | null,
+    readonly blockchain: Blockchain | null
 }

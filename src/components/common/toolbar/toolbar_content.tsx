@@ -5,8 +5,13 @@ import { NextRouter, withRouter } from 'next/router';
 
 import { StoreState } from '../../../types/store';
 import { Logo } from './logo';
+import { getEthAccount, getNetworkId, getWeb3State } from 'src/store/blockchain/selectors';
+import { Network, Web3State } from 'src/types/blockchain';
 
 interface StateProps {
+    networkId: number,
+    ethAccount: string,
+    web3State: Web3State
 }
 
 interface OwnProps {
@@ -20,12 +25,28 @@ type Props = StateProps & WithRouterProps;
 
 class ToolbarContent extends PureComponent<Props, OwnProps> {
 
-    getContentFromWeb3State = (): React.ReactNode => {
-        return <div className="wallet-dropdown separator">Web3 State Content</div>;
+    getContentFromWeb3State = () => {
+        return <div className="wallet-dropdown separator">{this.props.ethAccount}</div>;
     };
 
     renderNetworkName = () => {
-        return <div className="network-name">Network Name</div>
+        const networkName = Network[this.props.networkId];
+        return <div className="network-name">{networkName}</div>
+    }
+
+    renderNetworkData = () => {
+        const { web3State } = this.props
+        switch (web3State) {
+            case Web3State.Done: 
+                return (
+                    <>
+                        <Nav.Item>{this.renderNetworkName()}</Nav.Item>
+                        <Nav.Item>{this.getContentFromWeb3State()}</Nav.Item>
+                    </>
+                ) 
+        }
+       
+        
     }
 
     
@@ -45,8 +66,7 @@ class ToolbarContent extends PureComponent<Props, OwnProps> {
                     <Nav className="">
                     
                         <Nav className="spacer"></Nav>
-                        <Nav.Item>{this.renderNetworkName()}</Nav.Item>
-                        <Nav.Item>{this.getContentFromWeb3State()}</Nav.Item>
+                        {this.renderNetworkData()}
                     </Nav>
                         
                 </Navbar.Collapse>
@@ -58,8 +78,10 @@ class ToolbarContent extends PureComponent<Props, OwnProps> {
 
 const mapStateToProps = (state: StoreState): StateProps => {
     return {
-        
-    };
+        networkId: getNetworkId(state),
+        ethAccount: getEthAccount(state),
+        web3State: getWeb3State(state)
+    };  
 }
 
 const ToolbarContentContainer = connect(
