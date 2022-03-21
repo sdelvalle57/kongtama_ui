@@ -8,6 +8,7 @@ import { AppContainer } from '../components/app_container';
 // Sass files
 import '../../styles/global.scss'
 import '../../styles/toolbar.scss'
+import '../../styles/steps-modal.scss'
 
 
 interface StateProps {

@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, utils } from "ethers";
 import { NETWORK_ID } from "src/common/constants";
 import { enableWeb3, initializeWeb3Wrapper, isMetamaskInstalled, listenNetwork } from "src/services/web3_wrapper";
 import { Blockchain, Network, Web3State } from "src/types/blockchain";
@@ -25,24 +25,40 @@ export const initializeBlockchainData = createAction('blockchain/WALLET_DATA_set
 
 export const initWeb3: ThunkCreator<Promise<any>> = () => {
     return async (dispatch, getState, {}) => {
-        dispatch(setWeb3State(Web3State.Loading));
-        if(!isMetamaskInstalled()) {
-            return dispatch(setWeb3State(Web3State.NotInstalled, 'Web3 provider not installed'));
+      dispatch(setWeb3State(Web3State.Loading))
+      if (!isMetamaskInstalled()) {
+        return dispatch(
+          setWeb3State(Web3State.NotInstalled, 'Web3 provider not installed')
+        )
+      }
+  
+      const provider = await initializeWeb3Wrapper()
+      if (provider) {
+        dispatch(setProvider(provider))
+        const networkId = (await provider.getNetwork()).chainId
+        dispatch(setNetworkID(networkId))
+  
+        if (networkId !== NETWORK_ID) {
+          listenNetwork()
+          return dispatch(
+            setWeb3State(
+              Web3State.Error,
+              `Please select ${Network[NETWORK_ID]} network`
+            )
+          )
+        } else {
+          try {
+            const signer = provider.getSigner()
+            const address = await signer.getAddress()
+            utils.getAddress(address)
+            dispatch(initWallet())
+          } catch (e) {
+            dispatch(setWeb3State(Web3State.Network))
+          }
         }
-        
-        const web3Wrapper = await initializeWeb3Wrapper();
-        if(web3Wrapper) {
-            dispatch(setProvider(web3Wrapper))
-            const networkId = (await web3Wrapper.getNetwork()).chainId
-            dispatch(setNetworkID(networkId))
-            
-            if(networkId !== NETWORK_ID) {
-                listenNetwork();
-                return dispatch(setWeb3State(Web3State.Error, `Please select ${Network[NETWORK_ID]} network`));
-            } else return dispatch(setWeb3State(Web3State.Network))
-        } 
+      }
     }
-}
+  }
 
 export const initWallet: ThunkCreator<Promise<any>> = () => {
     return async (dispatch, getState) => {
@@ -69,7 +85,6 @@ const fetchWalletData: ThunkCreator<Promise<any>> = () => {
             const provider = getState().blockchain.provider;
             const ethAccount = (await provider.getSigner().getAddress()).toLowerCase();
             const ethBalance = (await provider.getBalance(ethAccount)).toString();
-            console.log("ethBala", ethBalance)
 
             dispatch(
                 initializeBlockchainData({

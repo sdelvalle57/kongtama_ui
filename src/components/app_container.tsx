@@ -26,17 +26,9 @@ class App extends React.Component<Props> {
     public componentDidMount = async () => {
 
         window.addEventListener("load", async ()=> {
-
             this.props.initWeb3()
-            
-            //if(!localStorage) localStorage = new LocalStorage(window.localStorage)
-            
-            //this.props.onConnectWallet();
         })
-        
     };
-
-
 
     public render = () => {
         return(
@@ -45,8 +37,6 @@ class App extends React.Component<Props> {
             </GeneralLayout>
         )
     };
-
-   
 }
 
 const mapStateToProps = (state: StoreState): StateProps => {

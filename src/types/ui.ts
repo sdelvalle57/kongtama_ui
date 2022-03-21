@@ -1,5 +1,6 @@
+import { StepsModalState } from "./steps-modal";
 
 
 export interface UI {
-    sayHello: string
+    stepsModal: StepsModalState
 }
