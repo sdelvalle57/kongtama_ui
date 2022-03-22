@@ -10,6 +10,7 @@ export enum StepKind {
 export interface StepMintWithValue {
     kind: StepKind.MintWithValue,
     address: string,
+    amount: number,
     value: BigNumber
     onDoneCallback: (receipt: ContractReceipt) => void
 }

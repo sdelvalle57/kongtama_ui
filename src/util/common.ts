@@ -9,10 +9,9 @@ export const readError = (error: Error): string => {
     let message = error.message.split('\n')[0]
     try {
       message = error.message
-        .replace(
-          'cannot estimate gas; transaction may fail or may require manual gas limit (error=',
-          ''
-        )
+        .split(
+          '(error=',
+        )[1]
         .split(', method')[0]
       const metamaskError = JSON.parse(message) as MetamaskError
       return (

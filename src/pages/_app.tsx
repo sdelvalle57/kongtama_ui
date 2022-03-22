@@ -9,6 +9,7 @@ import { AppContainer } from '../components/app_container';
 import '../../styles/global.scss'
 import '../../styles/toolbar.scss'
 import '../../styles/steps-modal.scss'
+import '../../styles/index.scss'
 
 
 interface StateProps {

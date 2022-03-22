@@ -23,7 +23,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    onSubmit: (address: string, value: BigNumber) => Promise<ContractTransaction>,
+    onSubmit: (address: string, amount:number, value: BigNumber) => Promise<ContractTransaction>,
     fetchWalletData: () => Promise<void>
 }
 
@@ -61,14 +61,16 @@ class MintWithValue extends React.Component<Props> {
 
     private readonly _mint = async ({ onLoading, onDone, onError }: any) => {
         const { 
-            step: { value, address, onDoneCallback }, 
+            step: { value, address, amount, onDoneCallback }, 
             onSubmit, 
             fetchWalletData,
             provider
         } = this.props;
 
+
+
         try {
-            const contractTransaction = await onSubmit(address, value);
+            const contractTransaction = await onSubmit(address, amount, value);
             onLoading();
             const contractReceipt = await contractTransaction.wait()
 
@@ -81,6 +83,7 @@ class MintWithValue extends React.Component<Props> {
             fetchWalletData()
 
         } catch (err) {
+            console.log(err)
             onError(err);
             fetchWalletData()
         }
@@ -96,7 +99,7 @@ const mapStateToProps = (state: StoreState): StateProps => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        onSubmit: (address: string, value: BigNumber) => dispatch(mintWithValue(address, value)),
+        onSubmit: (address: string, amount: number, value: BigNumber) => dispatch(mintWithValue(address, amount, value)),
         fetchWalletData: () =>  dispatch(fetchWalletData())
 
     }

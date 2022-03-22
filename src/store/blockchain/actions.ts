@@ -1,6 +1,6 @@
 import { BigNumber, ethers, utils } from "ethers";
 import { KONGTAMA, NETWORK_ID } from "src/common/constants";
-import { getNextTokenId, getPrice, mint } from "src/services/kongtama.service";
+import { getBalanceOf, getPrice, mint } from "src/services/kongtama.service";
 import { enableWeb3, initializeWeb3Wrapper, isMetamaskInstalled, listenNetwork } from "src/services/web3_wrapper";
 import { Blockchain, Network, Web3State } from "src/types/blockchain";
 import { readError } from "src/util/common";
@@ -86,16 +86,16 @@ export const fetchWalletData: ThunkCreator<Promise<any>> = () => {
       const provider = getState().blockchain.provider;
       const ethAccount = (await provider.getSigner().getAddress()).toLowerCase();
       const ethBalance = (await provider.getBalance(ethAccount)).toString();
-      const nextTokenId = (await getNextTokenId(KONGTAMA, provider)).toNumber()
       const kongtamaPrice = utils.formatEther(await getPrice(KONGTAMA, provider));
+      const kongtamaBalance = (await getBalanceOf(KONGTAMA, ethAccount, provider)).toNumber();
 
       dispatch(
         initializeBlockchainData({
           ethAccount,
           web3State: Web3State.Done,
           ethBalance,
-          nextTokenId,
-          kongtamaPrice
+          kongtamaPrice,
+          kongtamaBalance
         }),
       );
     } catch (error) {
@@ -104,12 +104,11 @@ export const fetchWalletData: ThunkCreator<Promise<any>> = () => {
   };
 };
 
-export const mintWithValue: ThunkCreator<Promise<any>> = (address: string, value: BigNumber) => {
+export const mintWithValue: ThunkCreator<Promise<any>> = (address: string, amount: number, value: BigNumber) => {
   return async (dispatch, getState) => {
-    const ethAccount = getState().blockchain.ethAccount
     try {
       const provider = getState().blockchain.provider;
-      return mint(address, ethAccount, provider, value)
+      return mint(address, amount, provider, value)
     } catch (e) {
       throw e
     }

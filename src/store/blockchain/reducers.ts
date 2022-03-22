@@ -16,8 +16,8 @@ const initialBlockchainState: Blockchain = {
         gasPriceInWei: DEFAULT_GAS_PRICE.toString(),
         estimatedTimeMs: DEFAULT_ESTIMATED_TRANSACTION_TIME_MS,
     },
-    nextTokenId: null,
-    kongtamaPrice: null
+    kongtamaPrice: null,
+    kongtamaBalance: null
 };
 
 export default function blockchain(state: Blockchain = initialBlockchainState, action: RootAction): Blockchain {

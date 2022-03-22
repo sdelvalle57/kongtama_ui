@@ -26,6 +26,7 @@ export const stepsModalReset = createAction('ui/steps_modal/reset');
 
 export const startMintWithValueStep: ThunkCreator = (
     address: string,
+    amount: number,
     value: BigNumber, 
     callback?: any
 ) => {
@@ -34,6 +35,7 @@ export const startMintWithValueStep: ThunkCreator = (
         const submitTx: StepMintWithValue = {
             kind: StepKind.MintWithValue,
             address,
+            amount,
             value,
             onDoneCallback: callback
         };

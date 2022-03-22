@@ -10,13 +10,6 @@ export const getURIOf = async (
     return erc721Controller.uri(tokenId)
 }
 
-export const getNextTokenId = async (
-    address: string,
-    web3: ethers.providers.Web3Provider
-): Promise<BigNumber> => {
-    const erc721Controller = new KongtamaController(address, web3.getSigner());
-    return erc721Controller.nextTokenId()
-}
 
 export const getPrice = async (
     address: string,
@@ -28,10 +21,19 @@ export const getPrice = async (
 
 export const mint = async (
     address: string,
-    to: string,
+    amount: number,
     web3: ethers.providers.Web3Provider,
     value?: BigNumber
 ): Promise<ContractTransaction> => {
     const erc721Controller = new KongtamaController(address, web3.getSigner());
-    return erc721Controller.mint(to, value)
+    return erc721Controller.mint(amount, value)
+}
+
+export const getBalanceOf = async (
+    address: string,
+    account: string,
+    web3: ethers.providers.Web3Provider,
+): Promise<BigNumber> => {
+    const erc721Controller = new KongtamaController(address, web3.getSigner());
+    return erc721Controller.balanceOf(account)
 }

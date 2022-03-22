@@ -33,12 +33,6 @@ export interface Blockchain {
     readonly message: string;
     readonly networkID: number;
     readonly gasInfo: GasInfo;
-    readonly nextTokenId: number | null;
     readonly kongtamaPrice: string | null;
+    readonly kongtamaBalance: number | null
 }
-
-export interface NftMetadata {
-    name: string
-    description: string
-    image: string
-  }
