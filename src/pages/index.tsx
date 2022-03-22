@@ -46,12 +46,16 @@ class Index extends PureComponent<Props, OwnProps> {
         if (nextTokenId) this.fetchNftMetadata(nextTokenId)
     }
 
-    componentDidUpdate(prevProps: Readonly<Props>): void {
+    componentDidUpdate(prevProps: Readonly<Props>) {
         if (
             !prevProps.nextTokenId &&
             this.props.nextTokenId &&
             !this.state.nftMetadataError
         ) {
+            return this.fetchNftMetadata(this.props.nextTokenId)
+        }
+
+        if(this.state.receipt && prevProps.nextTokenId < this.props.nextTokenId) {
             this.fetchNftMetadata(this.props.nextTokenId)
         }
     }
@@ -66,7 +70,6 @@ class Index extends PureComponent<Props, OwnProps> {
     }
 
     onMint = () => {
-        console.log("sias")
         this.setState({receipt: null})
         this.props.startMintStep(KONGTAMA, utils.parseEther(this.props.price), this.onMinted)
     }
