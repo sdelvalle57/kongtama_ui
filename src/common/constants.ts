@@ -9,3 +9,11 @@ export const DEFAULT_ESTIMATED_TRANSACTION_TIME_MS = ONE_MINUTE_MS / 4;
 export const NETWORK_ID = process.env.NETWORK_ID || 5;
 
 export const STEP_MODAL_DONE_STATUS_VISIBILITY_TIME: number = 3500;
+
+export const KONGTAMA = process.env.KONGTAMA || "0x87DF0b49574D06cdB1be497babEd0Cda2273A686"
+
+export const PINATA = process.env.PINATA || "https://ipfs.io/ipfs/QmX7HPbhMSqyMxpr4rKagR7PGPYER9UAcbwG2GR4GpKtn6"
+
+export const OPENSEA_ASSETS  = process.env.OPENSEA_ASSETS || "https://testnets.opensea.io/assets"
+
+export const ETH_SCAN = process.env.ETH_SCAN || "https://rinkeby.etherscan.io"

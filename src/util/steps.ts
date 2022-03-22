@@ -2,7 +2,7 @@ import { Step, StepKind } from "../types/steps-modal";
 
 export const getStepTitle = (step: Step): string => {
     switch (step.kind) {
-        case StepKind.MintWithSolution:
+        case StepKind.MintWithValue:
             return 'Claim NFT';
         case StepKind.AnotherCall:
             return "Another Call"

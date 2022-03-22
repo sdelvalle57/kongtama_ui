@@ -16,6 +16,8 @@ const initialBlockchainState: Blockchain = {
         gasPriceInWei: DEFAULT_GAS_PRICE.toString(),
         estimatedTimeMs: DEFAULT_ESTIMATED_TRANSACTION_TIME_MS,
     },
+    nextTokenId: null,
+    kongtamaPrice: null
 };
 
 export default function blockchain(state: Blockchain = initialBlockchainState, action: RootAction): Blockchain {
@@ -27,8 +29,7 @@ export default function blockchain(state: Blockchain = initialBlockchainState, a
         case getType(actions.setNetworkID):
             return { ...state, networkID: action.payload}
         case getType(actions.initializeBlockchainData):
-            const { ethAccount, web3State, ethBalance} = action.payload;
-            return { ...state, ethAccount, web3State, ethBalance}
+            return { ...state, ...action.payload }
         default:
             return state;
     }

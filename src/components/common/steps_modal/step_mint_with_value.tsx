@@ -2,31 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { getStepsModalCurrentStep } from '../../../store/ui/selectors';
-import { StepMintWithSolution } from '../../../types/steps-modal';
+import { StepMintWithValue } from '../../../types/steps-modal';
 import { StoreState } from '../../../types/store';
 import { BaseStepModal } from './base_step_modal';
 import { StepItem } from './steps_progress';
 import { getEstimatedTxTimeMs } from '../../../store/blockchain/selectors'
 import { STEP_MODAL_DONE_STATUS_VISIBILITY_TIME } from '../../../common/constants'
-import { ContractTransaction, ethers } from 'ethers';
+import { BigNumber, ContractTransaction, ethers } from 'ethers';
 import { sleep } from 'src/util/common';
+import { fetchWalletData, mintWithValue } from 'src/store/actions';
 
 interface ReceivedProps {
     buildStepsProgress: (currentStepItem: StepItem) => StepItem[];
     provider: ethers.providers.Web3Provider
 }
+
 interface StateProps {
     estimatedTxTimeMs: number;
-    step: StepMintWithSolution;
+    step: StepMintWithValue;
 }
 
 interface DispatchProps {
-    onSubmit: (solution: string) => Promise<ContractTransaction>,
+    onSubmit: (address: string, value: BigNumber) => Promise<ContractTransaction>,
+    fetchWalletData: () => Promise<void>
 }
 
 type Props = ReceivedProps & StateProps & DispatchProps;
 
-class MintWithSolution extends React.Component<Props> {
+class MintWithValue extends React.Component<Props> {
     public render = () => {
         const { buildStepsProgress, estimatedTxTimeMs, step } = this.props;
 
@@ -50,33 +53,36 @@ class MintWithSolution extends React.Component<Props> {
                 doneFooterCaption={doneFooterCaption}
                 buildStepsProgress={buildStepsProgress}
                 estimatedTxTimeMs={estimatedTxTimeMs}
-                runAction={this._addAssets}
+                runAction={this._mint}
                 showPartialProgress={true}
             />
         );
     };
 
-    private readonly _addAssets = async ({ onLoading, onDone, onError }: any) => {
+    private readonly _mint = async ({ onLoading, onDone, onError }: any) => {
         const { 
-            step: { solution, onDoneCallback }, 
+            step: { value, address, onDoneCallback }, 
             onSubmit, 
+            fetchWalletData,
             provider
         } = this.props;
 
         try {
-            const contractTransaction = await onSubmit(solution);
+            const contractTransaction = await onSubmit(address, value);
             onLoading();
             const contractReceipt = await contractTransaction.wait()
 
-            const receipt = await provider.waitForTransaction(contractReceipt.transactionHash);
+            await provider.waitForTransaction(contractReceipt.transactionHash);
             await sleep(STEP_MODAL_DONE_STATUS_VISIBILITY_TIME);
             
 
             onDone();
-            onDoneCallback(receipt.transactionHash);
+            onDoneCallback(contractReceipt);
+            fetchWalletData()
 
         } catch (err) {
             onError(err);
+            fetchWalletData()
         }
     };
 }
@@ -84,21 +90,21 @@ class MintWithSolution extends React.Component<Props> {
 const mapStateToProps = (state: StoreState): StateProps => {
     return {
         estimatedTxTimeMs: getEstimatedTxTimeMs(state),
-        step: getStepsModalCurrentStep(state) as StepMintWithSolution,
+        step: getStepsModalCurrentStep(state) as StepMintWithValue,
     };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        //TODO: distpatch to mint tokens
-        onSubmit: (solution: string) => dispatch()
+        onSubmit: (address: string, value: BigNumber) => dispatch(mintWithValue(address, value)),
+        fetchWalletData: () =>  dispatch(fetchWalletData())
 
     }
 }
 
-const StepMintWithSolutionContainer = connect(
+const StepMintWithValueContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(MintWithSolution);
+)(MintWithValue);
 
-export { StepMintWithSolutionContainer };
+export { StepMintWithValueContainer };

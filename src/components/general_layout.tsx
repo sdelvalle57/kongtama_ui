@@ -1,4 +1,5 @@
 import React from 'react';
+import { StepsModalContainer } from './common/steps_modal/steps_modal';
 
 
 interface OwnProps {
@@ -16,6 +17,7 @@ export const GeneralLayout = (props: Props) => {
             <div className="scrollable">
                 {children}
             </div>
+            <StepsModalContainer />
         </div>
     );
 };

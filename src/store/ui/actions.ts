@@ -1,8 +1,9 @@
+import { BigNumber } from 'ethers';
 import { createAction } from 'typesafe-actions';
 import { 
     Step, 
     StepKind,
-    StepMintWithSolution, 
+    StepMintWithValue, 
 } from '../../types/steps-modal';
 import { ThunkCreator } from '../../types/store';
 
@@ -23,15 +24,17 @@ export const stepsModalAdvanceStep = createAction('ui/steps_modal/advance_step')
 
 export const stepsModalReset = createAction('ui/steps_modal/reset');
 
-export const startSubmitPuzzleSolutionStep: ThunkCreator = (
-    solution: string, 
+export const startMintWithValueStep: ThunkCreator = (
+    address: string,
+    value: BigNumber, 
     callback?: any
 ) => {
     return async (dispatch, getState) => {
 
-        const submitTx: StepMintWithSolution = {
-            kind: StepKind.MintWithSolution,
-            solution,
+        const submitTx: StepMintWithValue = {
+            kind: StepKind.MintWithValue,
+            address,
+            value,
             onDoneCallback: callback
         };
 

@@ -1,15 +1,17 @@
+import { BigNumber, ContractReceipt } from "ethers"
 
-export type Step = StepMintWithSolution | StepAnotherCall
+export type Step = StepMintWithValue | StepAnotherCall
 
 export enum StepKind {
-    MintWithSolution = 'MintWithSolution',
+    MintWithValue = 'MintWithValue',
     AnotherCall = "AnotherCall"
 }
 
-export interface StepMintWithSolution {
-    kind: StepKind.MintWithSolution,
-    solution: string
-    onDoneCallback: (txHash: string) => void
+export interface StepMintWithValue {
+    kind: StepKind.MintWithValue,
+    address: string,
+    value: BigNumber
+    onDoneCallback: (receipt: ContractReceipt) => void
 }
 
 export interface StepAnotherCall {

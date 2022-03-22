@@ -58,7 +58,7 @@ class ToolbarContent extends PureComponent<Props, OwnProps> {
                 <Navbar.Brand  >
                     <Logo
                         image={logo}
-                        text={"Puzzle"}
+                        text={"Kongtama"}
                     />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

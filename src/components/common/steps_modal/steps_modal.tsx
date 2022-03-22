@@ -10,7 +10,7 @@ import { ModalContent } from './steps_common';
 import { StoreState } from '../../../types/store';
 import { getStepsModalCurrentStep, getStepsModalDoneSteps, getStepsModalPendingSteps } from '../../../store/ui/selectors'
 import { stepsModalReset } from '../../../store/actions';
-import {  StepMintWithSolutionContainer } from './step_mint_with_solution';
+import {  StepMintWithValueContainer } from './step_mint_with_value';
 import { getWeb3Provider } from 'src/store/blockchain/selectors';
 import { ethers } from 'ethers';
 
@@ -84,8 +84,8 @@ class StepsModal extends React.Component<Props> {
             <Modal ariaHideApp={false} isOpen={isOpen} style={modalThemeStyle as Styles}>   
                 <CloseModalButton onClick={reset} />
                     <ModalContent >
-                        {currentStep && currentStep.kind === StepKind.MintWithSolution && (
-                            <StepMintWithSolutionContainer provider={provider} key={stepIndex} buildStepsProgress={buildStepsProgress} />
+                        {currentStep && currentStep.kind === StepKind.MintWithValue && (
+                            <StepMintWithValueContainer provider={provider} key={stepIndex} buildStepsProgress={buildStepsProgress} />
                         )}
                     </ModalContent>
             </Modal>
