@@ -19,7 +19,8 @@ const initialBlockchainState: Blockchain = {
     kongtamaPrice: null,
     kongtamaBalance: null,
     maxMintPerWallet: null,
-    maxMint: null
+    maxMint: null,
+    nextTokenId: null
 };
 
 export default function blockchain(state: Blockchain = initialBlockchainState, action: RootAction): Blockchain {

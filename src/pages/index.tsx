@@ -1,11 +1,10 @@
 import { BigNumber, ContractReceipt, utils } from 'ethers';
 import React, { PureComponent } from 'react'
-import { Alert, Button, Col, Container, FormControl, Image, InputGroup, Row } from "react-bootstrap"
+import { Button, Col, Container, Image, Row } from "react-bootstrap"
 import { connect } from 'react-redux';
 import { ETH_SCAN, KONGTAMA, OPENSEA, OPENSEA_COLLECTION } from 'src/common/constants';
-import { WalletConnectButtonContainer } from 'src/components/wallet_connect_button';
 import { startMintWithValueStep } from 'src/store/actions';
-import { getEthAccount, getKongtamaBalance, getMaxMint, getMaxMintPerWallet, getPrice, getWeb3State } from 'src/store/blockchain/selectors';
+import { getEthAccount, getKongtamaBalance, getMaxMint, getMaxMintPerWallet, getNextTokenId, getPrice, getWeb3State } from 'src/store/blockchain/selectors';
 import { Web3State } from 'src/types/blockchain';
 import { StoreState } from 'src/types/store';
 
@@ -20,7 +19,8 @@ interface StateProps {
     ethAccount: string,
     maxMintPerWallet: number | null;
     maxMint: number | null;
-    kongtamaBalance: number | null
+    kongtamaBalance: number | null;
+    nextTokenId: number | null
 }
 
 interface DispatchProps {
@@ -114,21 +114,21 @@ class Index extends PureComponent<Props, OwnProps> {
       } 
 
       plus = () => {
-        const {maxMintPerWallet, kongtamaBalance } = this.props;
+        const {maxMintPerWallet, kongtamaBalance, maxMint, nextTokenId } = this.props;
         const { amount} = this.state
 
-        if(maxMintPerWallet >= (kongtamaBalance + amount + 1)) this.setState({ amount: amount+1})
+        if(maxMintPerWallet >= (kongtamaBalance + amount + 1) && amount <= (maxMint - nextTokenId - 1)) this.setState({ amount: amount+1})
 
       }
 
       renderForm = () => {
           const { amount } = this.state
-          const { price, web3State } = this.props
+          const { price, web3State, maxMint, nextTokenId } = this.props
           if(web3State !== Web3State.Done) return null;
           return (
             <div>
                 <div className="counter">
-                    {amount}/{1000}  <small>({(Number(price)*amount).toFixed(2)} ETH/{amount} NFT)</small>
+                    {amount}/{maxMint - nextTokenId - 1}  <small>({(Number(price)*amount).toFixed(2)} ETH/{amount} NFT)</small>
                 </div>
                 <div className='counter-manager'>
                     <Image className="image-button" onClick={this.plus} src="/static/img/plus-button.png" />
@@ -164,7 +164,8 @@ const mapStateToProps = (state: StoreState): StateProps => {
         ethAccount: getEthAccount(state),
         maxMintPerWallet: getMaxMintPerWallet(state),
         maxMint: getMaxMint(state),
-        kongtamaBalance: getKongtamaBalance(state)
+        kongtamaBalance: getKongtamaBalance(state),
+        nextTokenId: getNextTokenId(state)
     }
 }
 

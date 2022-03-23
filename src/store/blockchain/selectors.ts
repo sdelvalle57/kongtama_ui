@@ -12,3 +12,4 @@ export const getPrice= (state: StoreState): string => state.blockchain.kongtamaP
 export const getMaxMintPerWallet = (state: StoreState): number | null => state.blockchain.maxMintPerWallet
 export const getMaxMint= (state: StoreState): number | null => state.blockchain.maxMint
 export const getKongtamaBalance = (state: StoreState): number | null => state.blockchain.kongtamaBalance
+export const getNextTokenId = (state: StoreState): number | null => state.blockchain.nextTokenId

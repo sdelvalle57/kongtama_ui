@@ -36,5 +36,6 @@ export interface Blockchain {
     readonly kongtamaPrice: string | null;
     readonly kongtamaBalance: number | null;
     readonly maxMintPerWallet: number | null;
-    readonly maxMint: number | null
+    readonly maxMint: number | null;
+    readonly nextTokenId: number | null;
 }

@@ -53,3 +53,11 @@ export const getMaxMint= async (
     const erc721Controller = new KongtamaController(address, web3.getSigner());
     return erc721Controller.getMaxMint()
 }
+
+export const getNextTokenId= async (
+    address: string,
+    web3: ethers.providers.Web3Provider,
+): Promise<BigNumber> => {
+    const erc721Controller = new KongtamaController(address, web3.getSigner());
+    return erc721Controller.nextTokenId()
+}
