@@ -58,11 +58,18 @@ class Index extends PureComponent<Props, OwnProps> {
     }
 
     renderMinted = () => {
+        const { receipt } = this.state
         return (
             <>
-                Congrats on minting your KONGTAMA NFT!
+                <h4>Congrats on minting your KONGTAMA NFT!</h4>
+                <p>
+                    Click <a target="_blank" href={`${OPENSEA}/${this.props.ethAccount}`}>here</a> to view and sell your NFT at Opensea:
+                </p>
+                <p>
+                    Click <a target="_blank" href={`${ETH_SCAN}/tx/${(receipt as ContractReceipt).transactionHash}`}>here</a> to view your transaction on Etherscan:
+                </p>
 
-                Click <a target="_blank" href={`${OPENSEA}/${this.props.ethAccount}`}>here</a> to view and sell your NFT at Opensea:
+                
                 <Button onClick={()=> this.setState({receipt: null})} variant="outline-secondary">Back</Button>
             </>
         )
