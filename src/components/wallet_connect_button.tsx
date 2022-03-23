@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import { Button, Alert } from 'react-bootstrap';
+import { Button, Alert, Image } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { initWallet } from 'src/store/actions';
 import { getWeb3ErrorMessage, getWeb3State } from 'src/store/blockchain/selectors';
@@ -30,9 +30,12 @@ class WalletConnectButton extends PureComponent<Props> {
 
     renderLocked = () => {
         const done = this.props.web3State === Web3State.Done ;
-        const caption = done ? "Connected" : "Connect Wallet"
-        return <div className='wallet_connect'><Button disabled={done} onClick={this.connectWallet}>{caption}</Button></div>
-        
+        if(done) return null
+        return (
+            <div className='wallet_connect'>
+                <Image onClick={this.connectWallet} src="/static/img/connectwallet.png" />
+            </div>
+        )
     }
 
     renderLoading = () => {

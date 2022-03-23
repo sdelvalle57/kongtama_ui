@@ -185,6 +185,13 @@
     overflow: auto;
     width: 310px;
     height: 410px;
+
+    small {
+        color: red;
+        text-align: center;
+        margin-top: 2em;
+        opacity: 0.5;
+      }
 }
 
 .steps-modal-p {

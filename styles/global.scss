@@ -8,10 +8,11 @@
     --headingfont: "IBM Plex Mono";
     --blurbfont: "Work Sans";
     --bodyfont: "Work Sans";
-    --bodycolor: #232425;
-    --bodyfontsize: 16px;
+    --bodycolor: white;
+    --bodyfontsize: 22px;
     --linkcolor: #c9945b;
     --altcolor: #CCD0D2;
+    --backgroundcolor: #0a0a0a
 }
 
 body {
@@ -21,10 +22,11 @@ body {
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
+    background: var(--backgroundcolor);
 }
 
 .root_container {
-    background: aliceblue;
+    background: transparent;
     max-width: 100%;
     min-height: 100%;
 }

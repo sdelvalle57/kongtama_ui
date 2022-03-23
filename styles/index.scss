@@ -1,3 +1,42 @@
 .gif-content.col img {
     max-width: 40vw;
+    border-radius: 10px;
+}
+
+.mint-content.col {
+  background: #444;
+  padding: 3em;
+  border-radius: 10px;
+}
+
+.counter {
+  font-size: 30px;
+  font-weight: bolder;
+  small {
+    font-size: 15px;
   }
+}
+
+.counter-manager  {
+  img {
+    width: 40px;
+  }
+  img:first-child {
+    margin: 0.5em 0.5em 0.5em 0;
+  }
+  img:last-child {
+    margin: 0.5em 0em 0.5em 0.5em;
+  }
+}
+
+.image-button {
+  cursor: pointer;
+}
+
+.form-buttons img {
+  margin: 1em 1em 1em 0em;
+}
+
+h1, h2 {
+  font-weight: bold;
+}

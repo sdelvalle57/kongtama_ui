@@ -34,5 +34,7 @@ export interface Blockchain {
     readonly networkID: number;
     readonly gasInfo: GasInfo;
     readonly kongtamaPrice: string | null;
-    readonly kongtamaBalance: number | null
+    readonly kongtamaBalance: number | null;
+    readonly maxMintPerWallet: number | null;
+    readonly maxMint: number | null
 }

@@ -7,6 +7,8 @@ import { StoreState } from '../../../types/store';
 import { Logo } from './logo';
 import { getEthAccount, getNetworkId, getWeb3State } from 'src/store/blockchain/selectors';
 import { Network, Web3State } from 'src/types/blockchain';
+import { WalletConnectButtonContainer } from 'src/components/wallet_connect_button';
+import { truncateAddress } from 'src/util/common';
 
 interface StateProps {
     networkId: number,
@@ -26,7 +28,7 @@ type Props = StateProps & WithRouterProps;
 class ToolbarContent extends PureComponent<Props, OwnProps> {
 
     getContentFromWeb3State = () => {
-        return <div className="wallet-dropdown separator">{this.props.ethAccount}</div>;
+        return <div className="wallet-dropdown separator">{truncateAddress(this.props.ethAccount)}</div>;
     };
 
     renderNetworkName = () => {
@@ -44,6 +46,12 @@ class ToolbarContent extends PureComponent<Props, OwnProps> {
                         <Nav.Item>{this.getContentFromWeb3State()}</Nav.Item>
                     </>
                 ) 
+            default:
+                return (
+                    <>
+                        <WalletConnectButtonContainer />
+                    </>
+                )
         }
        
         
@@ -51,14 +59,13 @@ class ToolbarContent extends PureComponent<Props, OwnProps> {
 
     
     render() {
-        const logo = <img className="logo-styled" src="/static/img/logo.svg"  />;
+        const logo = <img className="logo-styled" src="/static/img/LOGO.png"  />;
 
         return (
             <Navbar bg='light' expand="lg">
                 <Navbar.Brand  >
                     <Logo
                         image={logo}
-                        text={"Kongtama"}
                     />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

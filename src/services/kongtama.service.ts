@@ -37,3 +37,19 @@ export const getBalanceOf = async (
     const erc721Controller = new KongtamaController(address, web3.getSigner());
     return erc721Controller.balanceOf(account)
 }
+
+export const getMaxMintPerWallet = async (
+    address: string,
+    web3: ethers.providers.Web3Provider,
+): Promise<BigNumber> => {
+    const erc721Controller = new KongtamaController(address, web3.getSigner());
+    return erc721Controller.getMaxMintperWallet()
+}
+
+export const getMaxMint= async (
+    address: string,
+    web3: ethers.providers.Web3Provider,
+): Promise<BigNumber> => {
+    const erc721Controller = new KongtamaController(address, web3.getSigner());
+    return erc721Controller.getMaxMint()
+}

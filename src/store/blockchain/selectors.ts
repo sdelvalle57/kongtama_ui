@@ -9,3 +9,6 @@ export const getWeb3ErrorMessage = (state: StoreState): string => state.blockcha
 export const getWeb3Provider = (state: StoreState): ethers.providers.Web3Provider => state.blockchain.provider;
 export const getEstimatedTxTimeMs = (state: StoreState): number => state.blockchain.gasInfo.estimatedTimeMs;
 export const getPrice= (state: StoreState): string => state.blockchain.kongtamaPrice
+export const getMaxMintPerWallet = (state: StoreState): number | null => state.blockchain.maxMintPerWallet
+export const getMaxMint= (state: StoreState): number | null => state.blockchain.maxMint
+export const getKongtamaBalance = (state: StoreState): number | null => state.blockchain.kongtamaBalance

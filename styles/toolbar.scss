@@ -1,6 +1,13 @@
 
+.navbar {
+    padding: 2.5rem 1rem;
+  }
+
+.bg-light {
+    background-color: transparent !important;
+}
 .separator:after {
-    background-color: #dedede;
+    background-color: transparent;
     content: '';
     height: 26px;
     margin-left: 17px;
@@ -37,8 +44,8 @@
     overflow: visible;
     left: 18px !important;
     top: 12px !important;
-    width: 60px;
-    height: 34px;
+    width: 200px;
+    height: 70px;
 }
 
 .wallet-dropdown {
@@ -59,7 +66,6 @@
 
 @media screen and (max-width: 992px) {
     nav.navbar-expand-lg {
-        // background: #fff !important;
         .navbar-nav {
             align-items: flex-start !important;
             padding: 0 3.9em;
@@ -84,3 +90,6 @@
     
 }
 
+.wallet_connect {
+    cursor: pointer;
+}

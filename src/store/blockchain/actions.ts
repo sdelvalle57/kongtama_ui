@@ -1,6 +1,6 @@
 import { BigNumber, ethers, utils } from "ethers";
 import { KONGTAMA, NETWORK_ID } from "src/common/constants";
-import { getBalanceOf, getPrice, mint } from "src/services/kongtama.service";
+import { getBalanceOf, getMaxMint, getMaxMintPerWallet, getPrice, mint } from "src/services/kongtama.service";
 import { enableWeb3, initializeWeb3Wrapper, isMetamaskInstalled, listenNetwork } from "src/services/web3_wrapper";
 import { Blockchain, Network, Web3State } from "src/types/blockchain";
 import { readError } from "src/util/common";
@@ -88,6 +88,8 @@ export const fetchWalletData: ThunkCreator<Promise<any>> = () => {
       const ethBalance = (await provider.getBalance(ethAccount)).toString();
       const kongtamaPrice = utils.formatEther(await getPrice(KONGTAMA, provider));
       const kongtamaBalance = (await getBalanceOf(KONGTAMA, ethAccount, provider)).toNumber();
+      const maxMintPerWallet = (await getMaxMintPerWallet(KONGTAMA, provider)).toNumber();
+      const maxMint = (await getMaxMint(KONGTAMA, provider)).toNumber()
 
       dispatch(
         initializeBlockchainData({
@@ -95,7 +97,9 @@ export const fetchWalletData: ThunkCreator<Promise<any>> = () => {
           web3State: Web3State.Done,
           ethBalance,
           kongtamaPrice,
-          kongtamaBalance
+          kongtamaBalance,
+          maxMintPerWallet,
+          maxMint
         }),
       );
     } catch (error) {

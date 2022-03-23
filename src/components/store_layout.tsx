@@ -8,7 +8,7 @@ class StoreLayout extends Component {
         return (
             <div >
                 <div>
-                    <Favicon url="/static/img/stn_logo.svg" />
+                    <Favicon url="/static/img/LOGO.png" />
                     <Head>
                         
                         <link

@@ -17,7 +17,9 @@ const initialBlockchainState: Blockchain = {
         estimatedTimeMs: DEFAULT_ESTIMATED_TRANSACTION_TIME_MS,
     },
     kongtamaPrice: null,
-    kongtamaBalance: null
+    kongtamaBalance: null,
+    maxMintPerWallet: null,
+    maxMint: null
 };
 
 export default function blockchain(state: Blockchain = initialBlockchainState, action: RootAction): Blockchain {
