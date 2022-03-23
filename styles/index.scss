@@ -1,6 +1,11 @@
-.gif-content.col img {
+.gif-content.col {
+  text-align: center;
+
+  img {
     max-width: 40vw;
     border-radius: 10px;
+  }
+    
 }
 
 .mint-content.col {

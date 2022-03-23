@@ -37,7 +37,7 @@ type Props = StateProps & DispatchProps
 class Index extends PureComponent<Props, OwnProps> {
 
     state = {
-        amount: 0,
+        amount: 1,
         receipt: null
     }
 
@@ -84,7 +84,6 @@ class Index extends PureComponent<Props, OwnProps> {
             <Row className="content">
                 <Col className="gif-content">
                     <Image src="/static/img/Kongtama.gif" />
-
                 </Col>
                 <Col className="mint-content">
                     {receipt? this.renderMinted() : this.renderMintSite()}
@@ -111,7 +110,7 @@ class Index extends PureComponent<Props, OwnProps> {
 
       minus = () => {
         const { amount } = this.state
-        if(amount > 0) this.setState({ amount: amount-1})
+        if(amount > 1) this.setState({ amount: amount-1})
       } 
 
       plus = () => {
@@ -129,7 +128,7 @@ class Index extends PureComponent<Props, OwnProps> {
           return (
             <div>
                 <div className="counter">
-                    {amount}/{(Number(price)*amount).toFixed(2)} $ETH  <small>({price} ETH/1 NFT)</small>
+                    {amount}/{1000}  <small>({(Number(price)*amount).toFixed(2)} ETH/{amount} NFT)</small>
                 </div>
                 <div className='counter-manager'>
                     <Image className="image-button" onClick={this.plus} src="/static/img/plus-button.png" />

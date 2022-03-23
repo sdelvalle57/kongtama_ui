@@ -10,7 +10,7 @@ export const NETWORK_ID = process.env.NETWORK_ID || 5;
 
 export const STEP_MODAL_DONE_STATUS_VISIBILITY_TIME: number = 3500;
 
-export const KONGTAMA = process.env.KONGTAMA || "0xED9D23Fd6ab143B26e4526C9A536E1120a2DCc63"
+export const KONGTAMA = process.env.KONGTAMA || "0x4470C02f552b9Ecd52516f5967add5F68E6f80Bf"
 
 export const PINATA = process.env.PINATA || "https://ipfs.io/ipfs/QmX7HPbhMSqyMxpr4rKagR7PGPYER9UAcbwG2GR4GpKtn6"
 
