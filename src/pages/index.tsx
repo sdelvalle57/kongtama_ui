@@ -114,16 +114,16 @@ class Index extends PureComponent<Props, OwnProps> {
       } 
 
       plus = () => {
-        const {maxMintPerWallet, kongtamaBalance, maxMint, nextTokenId } = this.props;
+        const {maxMintPerWallet, kongtamaBalance, nextTokenId, maxMint } = this.props;
         const { amount} = this.state
 
-        if(maxMintPerWallet >= (kongtamaBalance + amount + 1) && amount <= (maxMint - nextTokenId - 1)) this.setState({ amount: amount+1})
+        if(maxMintPerWallet >= (kongtamaBalance + amount + 1) && amount < (maxMint - nextTokenId - 1)) this.setState({ amount: amount+1})
 
       }
 
       renderForm = () => {
           const { amount } = this.state
-          const { price, web3State, maxMint, nextTokenId } = this.props
+          const { price, web3State, nextTokenId, maxMint } = this.props
           if(web3State !== Web3State.Done) return null;
           return (
             <div>
