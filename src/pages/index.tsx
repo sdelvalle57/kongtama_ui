@@ -168,7 +168,7 @@ class Index extends PureComponent<Props, OwnProps> {
         return (
             <div>
                 <div className="counter">
-                    {amount}/1000  <small>({(Number(price) * amount).toFixed(2)} ETH/{amount} NFT)</small>
+                    {nextTokenId - 1 + amount}/1000  <small>({(Number(price) * amount).toFixed(2)} ETH/{amount} NFT)</small>
                 </div>
                 <div className='counter-manager'>
                     <Image className="image-button" onClick={this.plus} src="/static/img/plus-button.png" />
