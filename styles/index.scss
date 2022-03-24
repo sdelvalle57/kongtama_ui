@@ -45,3 +45,17 @@
 h1, h2 {
   font-weight: bold;
 }
+
+
+@media (max-width: '778px') {
+  .gif-content.col img {
+    margin-bottom: 1em;
+  }
+  .mint-content.col {
+    font-size: 60%;
+  }
+
+  .form-buttons img {
+    height: 40px;
+  }
+}

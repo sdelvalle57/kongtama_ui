@@ -1,4 +1,4 @@
-import { BigNumber, ContractTransaction, ethers } from "ethers";
+import { BigNumber, ContractTransaction, ethers, Signer } from "ethers";
 import { KongtamaController } from "kongtama_core";
 
 export const getURIOf = async (
@@ -16,6 +16,14 @@ export const getPrice = async (
     web3: ethers.providers.Web3Provider
 ): Promise<BigNumber> => {
     const erc721Controller = new KongtamaController(address, web3.getSigner());
+    return erc721Controller.getPrice()
+}
+
+export const prefetchPrice = async (
+    address: string,
+    signer: Signer
+): Promise<BigNumber> => {
+    const erc721Controller = new KongtamaController(address, signer);
     return erc721Controller.getPrice()
 }
 
@@ -54,10 +62,26 @@ export const getMaxMint= async (
     return erc721Controller.getMaxMint()
 }
 
+export const prefetchMaxMint= async (
+    address: string,
+    signer: Signer,
+): Promise<BigNumber> => {
+    const erc721Controller = new KongtamaController(address, signer);
+    return erc721Controller.getMaxMint()
+}
+
 export const getNextTokenId= async (
     address: string,
     web3: ethers.providers.Web3Provider,
 ): Promise<BigNumber> => {
     const erc721Controller = new KongtamaController(address, web3.getSigner());
+    return erc721Controller.nextTokenId()
+}
+
+export const prefetchNextTokenId= async (
+    address: string,
+    signer: Signer,
+): Promise<BigNumber> => {
+    const erc721Controller = new KongtamaController(address, signer);
     return erc721Controller.nextTokenId()
 }

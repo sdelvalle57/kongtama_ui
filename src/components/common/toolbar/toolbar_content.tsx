@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { NextRouter, withRouter } from 'next/router';
 
@@ -62,21 +62,17 @@ class ToolbarContent extends PureComponent<Props, OwnProps> {
         const logo = <img className="logo-styled" src="/static/img/LOGO.png"  />;
 
         return (
-            <Navbar bg='light' expand="lg">
-                <Navbar.Brand  >
-                    <Logo
-                        image={logo}
-                    />
-                </Navbar.Brand>
+            <Navbar bg='dark' expand="lg">
+                <Container><Navbar.Brand><Logo image={logo}/></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="">
-                    
-                        <Nav className="spacer"></Nav>
-                        {this.renderNetworkData()}
+                    <Nav className="me-auto"></Nav>
+                    <Nav >
+                        <Nav.Item>{this.renderNetworkData()}</Nav.Item>
                     </Nav>
                         
                 </Navbar.Collapse>
+                </Container>
             </Navbar>
         )
     }

@@ -24,6 +24,11 @@ export const initializeBlockchainData = createAction('blockchain/WALLET_DATA_set
   return (blockchainData: Partial<Blockchain>) => resolve(blockchainData);
 });
 
+export const initializeKongtamaData = createAction('blockchain/KONGTAMA_INIT_set', resolve => {
+  return (kongtamaData: Partial<Blockchain>) => resolve(kongtamaData);
+});
+
+
 export const initWeb3: ThunkCreator<Promise<any>> = () => {
   return async (dispatch, getState, { }) => {
     dispatch(setWeb3State(Web3State.Loading))

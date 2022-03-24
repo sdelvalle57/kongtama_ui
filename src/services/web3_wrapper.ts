@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { ethers, Signer } from 'ethers';
 import Web3 from 'web3';
 
 export const isMetamaskInstalled = (): boolean => {
@@ -47,3 +47,11 @@ export const enableWeb3 = async (): Promise<boolean> => {
         return false;
     }
 }
+
+export const getExternalProvider = (): Signer => {
+    const providerUrl = `${process.env.INFURA_PROVIDER_URL}/${process.env.INFURA_API_KEY}`
+    const provider = new ethers.providers.JsonRpcProvider(providerUrl)
+    const wallet = ethers.Wallet.createRandom()
+    const signer = new ethers.VoidSigner(wallet.address, provider)
+    return signer as ethers.Signer
+  }

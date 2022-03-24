@@ -33,6 +33,8 @@ export default function blockchain(state: Blockchain = initialBlockchainState, a
             return { ...state, networkID: action.payload}
         case getType(actions.initializeBlockchainData):
             return { ...state, ...action.payload }
+        case getType(actions.initializeKongtamaData):
+            return { ...state, ...action.payload }
         default:
             return state;
     }
