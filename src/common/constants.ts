@@ -18,4 +18,4 @@ export const OPENSEA  = process.env.OPENSEA || "https://testnets.opensea.io"
 
 export const ETH_SCAN = process.env.ETH_SCAN || "https://rinkeby.etherscan.io"
 
-export const OPENSEA_COLLECTION = `https://testnets.opensea.io/assets?search[query]=${KONGTAMA}&search[resultModel]=ASSETS`
+export const OPENSEA_COLLECTION = `${OPENSEA}/collection/kongtama`

@@ -117,7 +117,7 @@ class Index extends PureComponent<Props, OwnProps> {
         const {maxMintPerWallet, kongtamaBalance, nextTokenId, maxMint } = this.props;
         const { amount} = this.state
 
-        if(maxMintPerWallet >= (kongtamaBalance + amount + 1) && amount < (maxMint - nextTokenId - 1)) this.setState({ amount: amount+1})
+        if(maxMintPerWallet >= (kongtamaBalance + amount + 1) && amount < (maxMint - (nextTokenId - 1))) this.setState({ amount: amount+1})
 
       }
 
@@ -128,7 +128,7 @@ class Index extends PureComponent<Props, OwnProps> {
           return (
             <div>
                 <div className="counter">
-                    {amount}/{maxMint - nextTokenId - 1}  <small>({(Number(price)*amount).toFixed(2)} ETH/{amount} NFT)</small>
+                    {amount}/{maxMint - (nextTokenId - 1)}  <small>({(Number(price)*amount).toFixed(2)} ETH/{amount} NFT)</small>
                 </div>
                 <div className='counter-manager'>
                     <Image className="image-button" onClick={this.plus} src="/static/img/plus-button.png" />
