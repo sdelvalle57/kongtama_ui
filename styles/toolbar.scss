@@ -84,11 +84,15 @@
     .wallet_connect {
         margin-top: 1em;
         img {
-            width: 190px;
+            width: 140px;
         }
     }
     .nav-item {
         margin: auto;
+    }
+    .logo-styled {
+        width: 140px;
+        height: 45px;
       }
 }
 
@@ -99,7 +103,7 @@
     }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 990px) {
     nav.navbar-expand-lg .navbar-nav {
         flex: 1;
         align-items: center;
